@@ -3,11 +3,17 @@
     <title>TOP</title>
 </head>
 <body>
+{% if user is null%}
+<div>
+    <button type="button" onclick="location.href='{% url 'social:begin' 'twitter' %}'">Twitterログイン</button>
+</div>
+{% else %}
 <div>
     <a href="/user/logout">
         <button type="button">ログアウト</button>
     </a>
 </div>
+{% endif %}
 <div>
     <div>
         <p><b>ScreenName</b>:{{ user.access_token.screen_name }}</p>
