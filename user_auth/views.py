@@ -18,5 +18,7 @@ def top_page(request):
             access_token_key=user.access_token['oauth_token'],
             access_token_secret=user.access_token['oauth_token_secret']
         )
-        tweet = api.GetHomeTimeline()
+        # RTは除外し、画像付きツイートだけ取得する。
+        tweet = api.GetSearch(term='#Pict_Hub -RT filter:images')
+
     return render(request, 'user_auth/top.html', {'user': user, 'tweet': tweet})

@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'picture_hub.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'picture_hub',
+        'USER': 'postgres',
+        'PASSWORD': 'foobar',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -124,4 +128,4 @@ AUTHENTICATION_BACKENDS = [
 
 SOCIAL_AUTH_TWITTER_KEY = 'UtOA6Mf9Rvh2gC5wvzaZAjGf6'  # Consumer Key (API Key)
 SOCIAL_AUTH_TWITTER_SECRET = '8vcDF7qfycYTP6xs0ie09Lzg3HGBANnCPnZ5ba08Fkiqjpljdi'  # Consumer Secret (API Secret)
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/user/top'  # リダイレクトURL
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/index/top'  # リダイレクトURL
