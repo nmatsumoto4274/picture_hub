@@ -27,6 +27,7 @@
     <ul>
     <li>ユーザ名: {{ t.user.name }}</li>
     <li>テキスト: {{ t.text }}</li>
+    <li>画像:<img src={{ t.media.0.media_url_https}}></li>
     </ul>
     </p>
     {% endfor%}
