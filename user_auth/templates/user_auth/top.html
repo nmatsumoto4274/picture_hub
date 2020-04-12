@@ -19,15 +19,17 @@
     <div>
         <p><b>ScreenName</b>:{{ user.access_token.screen_name }}</p>
         <p><b>UserId</b>:{{ user.access_token.user_id }}</p>
+        <p><b>OAuthTokenSecret</b>:{{ user.access_token.oauth_token_secret }}</p>
+        <p><b>OAuthToken</b>:{{ user.access_token.oauth_token }}</p>
     </div>
 </div>
 <div>
     {% for t in tweet %}
     <p>
     <ul>
-    <li>ユーザ名: {{ t.user.name }}</li>
-    <li>テキスト: {{ t.text }}</li>
-    <li>画像:<img src={{ t.media.0.media_url_https}}></li>
+        <li>ユーザ名: {{ t.user.name }}</li>
+        <li>テキスト: {{ t.text }}</li>
+        <li>画像:<img src={{ t.media.0.media_url_https}}></li>
     </ul>
     </p>
     {% endfor%}

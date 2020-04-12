@@ -22,3 +22,5 @@ def top_page(request):
         tweet = api.GetSearch(term='#Pict_Hub -RT filter:images')
 
     return render(request, 'user_auth/top.html', {'user': user, 'tweet': tweet})
+
+
