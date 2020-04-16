@@ -11,6 +11,33 @@
     <title>Title</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Pict_HUB</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切替">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            {% if user.id is null%}
+            <li class="nav-item active">
+                <button type="button" onclick="location.href='{% url 'social:begin' 'twitter' %}'">Twitterログイン</button>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">
+                    {{ user.access_token.screen_name }}でログイン中
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/index/logout">
+                    <button type="button">ログアウト</button>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
 {% block content %}
 {% endblock %}
 <!-- jQuery、Popper.js、Bootstrap JS -->
