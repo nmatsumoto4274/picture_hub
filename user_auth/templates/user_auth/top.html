@@ -1,15 +1,4 @@
 {% extends 'base.html' %}
 {% block content %}
-<header>
-    <h1>
-        サンプルのサイト
-    </h1>
-    {% if user is null%}
-    <button type="button" onclick="location.href='{% url 'social:begin' 'twitter' %}'">Twitterログイン</button>
-    {% else %}
-    <a href="/index/logout">
-        <button type="button">ログアウト</button>
-    </a>
-    {% endif %}
-</header>
+<p>トップページ</p>
 {% endblock %}
