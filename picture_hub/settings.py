@@ -11,15 +11,21 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import json
+
+# 設定ファイルJson読み込み
+json_open = open('keys.json', 'r')
+key_json = json.load(json_open)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!oz6yv6li3ty=0c@&fvzzf^86ed3o@rw#m_nzd7px+u01abt66'
+SECRET_KEY = key_json['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -126,8 +132,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-SOCIAL_AUTH_TWITTER_KEY = 'UtOA6Mf9Rvh2gC5wvzaZAjGf6'  # Consumer Key (API Key)
-SOCIAL_AUTH_TWITTER_SECRET = '8vcDF7qfycYTP6xs0ie09Lzg3HGBANnCPnZ5ba08Fkiqjpljdi'  # Consumer Secret (API Secret)
+SOCIAL_AUTH_TWITTER_KEY = key_json['SOCIAL_AUTH_TWITTER_KEY']  # Consumer Key (API Key)
+SOCIAL_AUTH_TWITTER_SECRET = key_json['SOCIAL_AUTH_TWITTER_SECRET'] # Consumer Secret (API Secret)
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/portfolios/top'  # リダイレクトURL
-
-
