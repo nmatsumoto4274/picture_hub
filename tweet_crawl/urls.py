@@ -8,4 +8,5 @@ app_name = 'tweet_crawl'
 urlpatterns = [
     path('top/', views.top, name="top"),
     path('logout/', django_views.LogoutView.as_view(template_name='tweet_crawl/logout.html'), name='logout'),
+    path('<screen_name>/', views.portfolio, name="portfolio"),
 ]
