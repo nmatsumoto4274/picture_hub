@@ -1,0 +1,9 @@
+{
+  "SECRET_KEY": "",
+  "SOCIAL_AUTH_TWITTER_KEY": "",
+  "SOCIAL_AUTH_TWITTER_SECRET": "",
+  "DB_USER": "",
+  "DB_PASSWORD": "",
+  "DB_HOST": "",
+  "DB_PORT": ""
+}
