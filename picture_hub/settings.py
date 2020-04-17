@@ -84,10 +84,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'picture_hub',
-        'USER': 'postgres',
-        'PASSWORD': 'foobar',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'USER': key_json["DB_USER"],
+        'PASSWORD': key_json["DB_PASSWORD"],
+        'HOST': key_json["DB_HOST"],
+        'PORT': key_json["DB_PORT"],
     }
 }
 
@@ -133,5 +133,5 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SOCIAL_AUTH_TWITTER_KEY = key_json['SOCIAL_AUTH_TWITTER_KEY']  # Consumer Key (API Key)
-SOCIAL_AUTH_TWITTER_SECRET = key_json['SOCIAL_AUTH_TWITTER_SECRET'] # Consumer Secret (API Secret)
+SOCIAL_AUTH_TWITTER_SECRET = key_json['SOCIAL_AUTH_TWITTER_SECRET']  # Consumer Secret (API Secret)
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/portfolios/top'  # リダイレクトURL
