@@ -1,3 +1,15 @@
 from django.shortcuts import render
+from social_django.models import UserSocialAuth
 
-# Create your views here.
+
+def top(request):
+    """
+    トップページのView関数
+    TODO ログイン未済の場合はトップページへ遷移し、ログイン済の場合はポートフォリオへリダイレクトします
+    :param request: リクエスト
+    :return: リソース
+    """
+    user = None
+    if request.user.id is not None:
+        user = UserSocialAuth.objects.get(user_id=request.user.id)
+    return render(request, 'tweet_crawl/top.html', {'user': user})
