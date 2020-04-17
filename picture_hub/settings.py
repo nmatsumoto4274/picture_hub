@@ -55,7 +55,7 @@ ROOT_URLCONF = 'picture_hub.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,3 +130,5 @@ AUTHENTICATION_BACKENDS = [
 SOCIAL_AUTH_TWITTER_KEY = 'UtOA6Mf9Rvh2gC5wvzaZAjGf6'  # Consumer Key (API Key)
 SOCIAL_AUTH_TWITTER_SECRET = '8vcDF7qfycYTP6xs0ie09Lzg3HGBANnCPnZ5ba08Fkiqjpljdi'  # Consumer Secret (API Secret)
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/index/top'  # リダイレクトURL
+
+
