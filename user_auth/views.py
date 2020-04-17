@@ -1,9 +1,6 @@
-import twitter
 from django.shortcuts import render
 
 from social_django.models import UserSocialAuth
-
-from picture_hub import settings
 
 
 def top_page(request):
