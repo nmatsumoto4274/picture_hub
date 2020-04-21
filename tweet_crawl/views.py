@@ -5,7 +5,6 @@ from social_django.models import UserSocialAuth
 def top(request):
     """
     トップページのView関数
-    TODO ログイン未済の場合はトップページへ遷移し、ログイン済の場合はポートフォリオへリダイレクトします
     :param request: リクエスト
     :return: リソース
     """
@@ -17,7 +16,7 @@ def top(request):
 
 def portfolio(request, screen_name):
     """
-    ポートフォリオViews
+    ポートフォリオページのView関数
     :param screen_name: Twitter表示名
     :param request: リクエスト
     :return: リソース

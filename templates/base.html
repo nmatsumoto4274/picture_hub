@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Pict_HUB</a>
+    <a class="navbar-brand" href="{% url 'tweet_crawl:top' %}">Pict_HUB</a>
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切替">
         <span class="navbar-toggler-icon"></span>
@@ -32,6 +32,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/portfolios/logout">
                     <button type="button">ログアウト</button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'tweet_crawl:portfolio' user.access_token.screen_name %}">
+                    <button type="button">マイポートフォリオ</button>
                 </a>
             </li>
             {% endif %}
