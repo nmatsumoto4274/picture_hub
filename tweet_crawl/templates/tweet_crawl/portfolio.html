@@ -1,4 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<!-- ユーザ情報(TODO ここに芝を生やしたい。) -->
 <p> {{ screen_name }}のポートフォリオページ</p>
+
+<!-- 投稿ボタン -->
+{% if user.id is not null%}
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#centerModal">
+    投稿ボタン
+</button>
+<div class="modal fade" data-backdrop="static" id="centerModal" tabindex="-1" role="dialog" aria-labelledby="modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mdtitle">写真・イラストをTwitterへUploadする</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="form-group">
+                <label for="file">ファイル（複数選択可）</label>
+                <div id="file" class="input-group">
+                    <div class="custom-file">
+                        <input type="file" id="cutomfile" class="custom-file-input" name="cutomfile[]" multiple/>
+                        <label class="custom-file-label" for="customfile" data-browse="参照">ファイル選択...</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary reset">取消</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- 投稿一覧 -->
+{% if tweet_list %}
+{% for tweet in tweet_list %}
+<p>{{ tweet.create_datetime }}</p>
+{% endfor %}
+{% else %}
+<p>まだ投稿されていません。</p>
+{% endif %}
+
 {% endblock %}
