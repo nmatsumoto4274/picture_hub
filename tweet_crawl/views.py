@@ -33,7 +33,3 @@ def portfolio(request, screen_name):
 
     return render(request, 'tweet_crawl/portfolio.html',
                   {'screen_name': screen_name, 'user': user, 'tweet_list': tweet_list})
-
-
-def update(request):
-    print(True)
