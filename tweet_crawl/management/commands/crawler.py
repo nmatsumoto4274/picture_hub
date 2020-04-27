@@ -35,6 +35,8 @@ class Command(BaseCommand):
                 tweets = api.GetSearch(term='#Pict_Hub -RT filter:images from:' + screen_name,
                                        since_id=since_id['id__max'])
 
-            # 登録未済のツイートが存在していたら、取得して登録
+            # TODO 登録未済のツイートだった場合、画像を登録
+
+            # TODO 登録未済のツイートを画像と紐づけて登録
             for tweet in tweets:
                 print(twitter_user.screen_name, since_id, tweets)
