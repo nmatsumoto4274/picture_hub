@@ -5,9 +5,10 @@
 <p> {{ screen_name }}のポートフォリオページ</p>
 
 <!-- 投稿一覧 -->
-{% if tweet_list %}
-{% for tweet in tweet_list %}
-<p>{{ tweet.create_datetime }}</p>
+{% if picture_list %}
+{% for picture in picture_list %}
+<p><img src="{{ picture.picture_url }}" alt=""></p>
+
 {% endfor %}
 {% else %}
 <p>まだ投稿されていません。</p>
