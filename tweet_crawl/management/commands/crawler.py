@@ -41,6 +41,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         users = UserSocialAuth.objects.all()
         for user in users:
+            # TODO ユーザの件数分だけ検索APIを実行しているが、この状態だとAPI限界達してしまうため、ユーザタイムライン取得に変更する
             # Twitter APIインスタンスの生成
             token_dict = user.extra_data['access_token']
             api = twitter.Api(consumer_key=settings.SOCIAL_AUTH_TWITTER_KEY,
