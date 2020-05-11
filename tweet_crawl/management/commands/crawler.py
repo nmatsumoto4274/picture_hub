@@ -27,35 +27,44 @@ class Command(BaseCommand):
         japan_time = time.strftime("%Y-%m-%d %H:%M:%S", time_local)
         return japan_time
 
-    def __get_tweets(self, api, screen_name, since_id):
+    def __get_tweets(self, api, uid, since_id):
         """
         ツイートの取得
         :param api: Twitter APIのインスタンス
-        :param screen_name: Twitter表示名
+        :param uid: Twitterのuid
         :param since_id: Tweetテーブルに存在するレコードのID最大値
         :return: Tweetリスト
         """
-        term = '#Pict_Hub -RT filter:images from:' + screen_name
-        return api.GetSearch(term=term) if since_id is None else api.GetSearch(term=term, since_id=since_id['id__max'])
+        result = []
+        if since_id:
+            tweets = api.GetUserTimeline(user_id=uid, since_id=since_id['id__max'], count=200, include_rts=False)
+        else:
+            tweets = api.GetUserTimeline(user_id=uid, count=200, include_rts=False)
+        for tweet in tweets:
+            if tweet.media is not None and len(tweet.hashtags) > 0:
+                tags = []
+                for t in tweet.hashtags:
+                    tags.append(t.text)
+                if "Pict_Hub" in tags:
+                    result.append(tweet)
+                    break
+        return result
 
     def handle(self, *args, **kwargs):
+        """
+        メイン関数
+        :param args:
+        :param kwargs:
+        :return:
+        """
         users = UserSocialAuth.objects.all()
         for user in users:
-            # TODO ユーザの件数分だけ検索APIを実行しているが、この状態だとAPI限界達してしまうため、ユーザタイムライン取得に変更する
-            # Twitter APIインスタンスの生成
             token_dict = user.extra_data['access_token']
             api = twitter.Api(consumer_key=settings.SOCIAL_AUTH_TWITTER_KEY,
                               consumer_secret=settings.SOCIAL_AUTH_TWITTER_SECRET,
                               access_token_key=token_dict['oauth_token'],
                               access_token_secret=token_dict['oauth_token_secret'])
-
-            # Twitter APIで取得した最新のユーザ情報を正として利用する
-            twitter_user = api.GetUser(user_id=user.uid)
-
-            # 未登録ツイートの検索・取得
-            tweets = self.__get_tweets(api, twitter_user.screen_name, Tweet.objects.all().aggregate(Max('id')))
-
-            # 登録処理
+            tweets = self.__get_tweets(api, user.uid, Tweet.objects.all().aggregate(Max('id')))
             for tweet in tweets:
                 if Tweet.objects.filter(id=tweet.id).count() >= 0:
                     t = Tweet(id=tweet.id, user_id=user.id, create_datetime=self.__conv_time(tweet.created_at))
@@ -63,6 +72,5 @@ class Command(BaseCommand):
                     for picture in tweet.media:
                         p = Picture(id=picture.id, tweet_id=tweet.id, picture_url=picture.media_url_https)
                         p.save()
-
-            print(twitter_user.screen_name, 'Done!')
+            print(user.uid, 'Done!')
         print('All tasks Done!')
