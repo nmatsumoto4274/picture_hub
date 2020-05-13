@@ -10,11 +10,11 @@
         var now = new Date();
         cal.init({
             itemSelector: '#sample-heatmap',
-            domain: "month",
+            domain: "week",
             data: datas,
-            domainLabelFormat: '%Y-%m',
+            domainLabelFormat: '',
             start: new Date(now.getFullYear(), now.getMonth() - 11),
             cellSize: 10,
-            range: 12,
+            range: 48,
             legend: [1, 3, 5, 7, 10],
         });
