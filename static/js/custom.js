@@ -1,34 +1,20 @@
-$('.custom-file-input').on('change', handleFileSelect);
-function handleFileSelect(evt) {
-        $('#preview').remove();// 繰り返し実行時の処理
-        $(this).parents('.input-group').after('<div id="preview"></div>');
-
-    var files = evt.target.files;
-
-    for (var i = 0, f; f = files[i]; i++) {
-
-        var reader = new FileReader();
-
-        reader.onload = (function(theFile) {
-            return function(e) {
-                if (theFile.type.match('image.*')) {
-                    var $html = ['<div class="d-inline-block mr-1 mt-1"><img class="img-thumbnail" src="', e.target.result,'" title="', escape(theFile.name), '" style="height:100px;" /><div class="small text-muted text-center">', escape(theFile.name),'</div></div>'].join('');// 画像では画像のプレビューとファイル名の表示
-                } else {
-                    var $html = ['<div class="d-inline-block mr-1"><span class="small">', escape(theFile.name),'</span></div>'].join('');//画像以外はファイル名のみの表示
-                }
-
-                $('#preview').append($html);
-            };
-        })(f);
-
-        reader.readAsDataURL(f);
-    }
-    $(this).next('.custom-file-label').html(+ files.length + '個のファイルを選択しました');
-}
-
-//ファイルの取消
-$('.reset').click(function(){
-    $(this).parent().prev().children('.custom-file-label').html('ファイル選択...');
-    $('#preview').remove();
-    $('.custom-file-input').val('');
-})
+//ヒートマップ
+       var datas = {
+            "1530370800" : 1, // 2018/07/01
+            "1530457200" : 3, // 2018/07/02
+            "1533049200" : 5, // 2018/08/01
+            "1533135600" : 7, // 2018/08/02
+            "1546268400" : 10 // 2019/01/01
+        };
+        var cal = new CalHeatMap();
+        var now = new Date();
+        cal.init({
+            itemSelector: '#sample-heatmap',
+            domain: "week",
+            data: datas,
+            domainLabelFormat: '',
+            start: new Date(now.getFullYear(), now.getMonth() - 11),
+            cellSize: 10,
+            range: 48,
+            legend: [1, 3, 5, 7, 10],
+        });

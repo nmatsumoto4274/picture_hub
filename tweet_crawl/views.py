@@ -20,7 +20,6 @@ def top(request):
 def portfolio(request, screen_name):
     """
     ポートフォリオページのView関数
-    TODO ポートフォリオ移動前に、対象ツイートの件数を取得し、DBに登録されている件数より多ければ、update画面へ遷移
     :param screen_name: Twitter表示名
     :param request: リクエスト
     :return: リソース
